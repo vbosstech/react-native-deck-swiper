@@ -400,7 +400,10 @@ class Swiper extends Component {
     )
   }
 
-  swipeTop = (mustDecrementCardIndex = false) => {
+  swipeTop = (mustDecrementCardIndex = false,  isShowLabel=false) => {
+    if(isShowLabel){
+      this.setState({ labelType: LABEL_TYPES.TOP })
+    }
     this.swipeCard(
       this.props.onSwipedTop,
       0,
@@ -409,7 +412,10 @@ class Swiper extends Component {
     )
   }
 
-  swipeBottom = (mustDecrementCardIndex = false) => {
+  swipeBottom = (mustDecrementCardIndex = false, isShowLabel=false) => {
+    if(isShowLabel){
+      this.setState({ labelType: LABEL_TYPES.BOTTOM })
+    }
     this.swipeCard(
       this.props.onSwipedBottom,
       0,
