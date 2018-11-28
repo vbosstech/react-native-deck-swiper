@@ -374,21 +374,29 @@ class Swiper extends Component {
     })
   }
 
-  swipeLeft = (mustDecrementCardIndex = false) => {
+  swipeLeft = (mustDecrementCardIndex = false, isShowLabel=false) => {
+    if(isShowLabel){
+      this.setState({ labelType: LABEL_TYPES.LEFT })
+    }
     this.swipeCard(
       this.props.onSwipedLeft,
       -this.props.horizontalThreshold,
       0,
-      mustDecrementCardIndex
+      mustDecrementCardIndex,
+      isShowLabel
     )
   }
 
-  swipeRight = (mustDecrementCardIndex = false) => {
+  swipeRight = (mustDecrementCardIndex = false, isShowLabel=false) => {
+    if(isShowLabel){
+      this.setState({ labelType: LABEL_TYPES.RIGHT })
+    }
     this.swipeCard(
       this.props.onSwipedRight,
       this.props.horizontalThreshold,
       0,
-      mustDecrementCardIndex
+      mustDecrementCardIndex,
+      isShowLabel
     )
   }
 
@@ -414,7 +422,8 @@ class Swiper extends Component {
     onSwiped,
     x = this._animatedValueX,
     y = this._animatedValueY,
-    mustDecrementCardIndex = false
+    mustDecrementCardIndex = false,
+    isShowLabel = false
   ) => {
     this.setState({ panResponderLocked: true })
     this.animateStack()
@@ -438,6 +447,12 @@ class Swiper extends Component {
         this.incrementCardIndex(onSwiped)
       }
       this.setSwipeBackCardXY(x, y)
+
+      if(isShowLabel){
+        this.setState({
+          labelType: LABEL_TYPES.NONE
+        })
+      }
     })
   }
 
